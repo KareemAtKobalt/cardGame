@@ -1,11 +1,11 @@
-import React from 'react';
-import './App.css';
-import Card from './components/card/Card'
+import React from "react";
+import "./App.css";
+import Deck from "./components/game/Deck";
 
 function App() {
   return (
     <div className="App">
-      <Card/>
+      <Deck />
     </div>
   );
 }
