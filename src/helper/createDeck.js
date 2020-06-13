@@ -1,15 +1,26 @@
 import cards from "../data/CardData";
 
-const createDeck = cards.numbers.reduce((deck, number) => {
+const createNormalCards = cards.numbers.reduce((deck, number) => {
   cards.suites.forEach(suite => {
     deck.push({
       number,
       suite
     });
   });
-  console.log("///////////////////////////createdeck loop");
   //need to add jokers to the deck
+
   return deck;
 }, []);
 
-export default createDeck;
+const createDeck = () => {
+  const deck = createNormalCards
+  console.log(" Joker ", deck);
+ cards.jokers.forEach(card => {
+    deck.push({joker:card})
+  })
+
+  return deck 
+
+};
+
+export default createDeck();

@@ -14,12 +14,18 @@ const mapDispatchToProps = dispatch => {
     onLoad: () => dispatch(newGame())
   };
 };
+//const {deck}=this.props
+
 
 class Deck extends Component {
+
+
   render() {
     return (
       <div>
-        <Card />
+      
+     { this.props.deck.map(card => <Card card={card}/>)}
+        
       </div>
     );
   }
