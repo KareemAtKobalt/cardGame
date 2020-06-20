@@ -1,4 +1,4 @@
-import { START_GAME_DECK } from "../constants";
+import { START_GAME_DECK, CLICK_ON_CARD } from "../constants";
 import createDeck from "../helper/createDeck";
 
 export const newGame = () => {
@@ -6,5 +6,15 @@ export const newGame = () => {
     type: START_GAME_DECK,
     payload: createDeck
   };
-  //   dispatch({ type: REQUEST_ROBOTS_SUCCESS, payload: data });
+};
+
+// payload need to be more meaningful
+export const clickOnCard = card => {
+  return {
+    type: CLICK_ON_CARD,
+    payload: {
+      suite: card.suite,
+      number: card.number
+    }
+  };
 };

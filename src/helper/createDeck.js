@@ -13,14 +13,12 @@ const createNormalCards = cards.numbers.reduce((deck, number) => {
 }, []);
 
 const createDeck = () => {
-  const deck = createNormalCards
-  console.log(" Joker ", deck);
- cards.jokers.forEach(card => {
-    deck.push({joker:card})
-  })
+  const deck = createNormalCards;
+  cards.jokers.forEach(card => {
+    deck.push({ joker: card });
+  });
 
-  return deck 
-
+  return deck;
 };
 
 export default createDeck();

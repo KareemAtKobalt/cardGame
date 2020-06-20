@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import Card from "./Card";
 import { connect } from "react-redux";
-// import createDeck from "../../helper/createDeck";
-
 import { newGame } from "../../action/action";
 
+//may need to move these functions in app.js so all components can access it.
 const mapStateToProps = state => {
   return { deck: state.deckReducer.deck };
 };
@@ -14,26 +13,19 @@ const mapDispatchToProps = dispatch => {
     onLoad: () => dispatch(newGame())
   };
 };
-//const {deck}=this.props
-
 
 class Deck extends Component {
-
-
   render() {
     return (
       <div>
-      
-     { this.props.deck.map(card => <Card card={card}/>)}
-        
+        {this.props.deck.map((card, index) => (
+          <Card key={index} card={card} />
+        ))}
       </div>
     );
   }
   componentDidMount() {
-    console.log("props", this.props);
-    console.log("state", this.state);
     this.props.onLoad();
-    console.log("hi");
   }
 }
 
