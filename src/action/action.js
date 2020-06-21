@@ -1,4 +1,4 @@
-import { START_GAME_DECK, CLICK_ON_CARD } from "../constants";
+import { START_GAME_DECK, CLICK_ON_CARD, REMOVE_CARD_FROM_DECK } from "../constants";
 import createDeck from "../helper/createDeck";
 
 export const newGame = () => {
@@ -14,7 +14,16 @@ export const clickOnCard = card => {
     type: CLICK_ON_CARD,
     payload: {
       suite: card.suite,
-      number: card.number
+      number: card.number,
+      id: card.id
     }
   };
+
 };
+
+export const clickOnEndPlay = () => {
+  return {
+    type: REMOVE_CARD_FROM_DECK
+  }
+}
+

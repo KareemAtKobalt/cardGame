@@ -37,7 +37,7 @@ const mapDispatchToProps = dispatch => {
 
 const Card = props => {
   const card = props.card;
-  // console.log("Card ", card);
+  console.log("Card ", card);
 
   return (
     <div className="Card" onClick={e => props.clickOnCard(e.target, card)}>
