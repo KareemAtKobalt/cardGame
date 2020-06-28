@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import "./Card.css";
 import { clickOnCard } from "../../action/action";
 
+
 const renderSwitch = card => {
   if (card.number) {
     switch (card.number) {

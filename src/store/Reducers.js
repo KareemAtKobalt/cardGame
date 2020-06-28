@@ -1,4 +1,6 @@
 import { START_GAME_DECK, CLICK_ON_CARD, REMOVE_CARD_FROM_DECK } from "../constants";
+import { store } from './store.js'
+
 
 const initialDeckState = {
   deck: []
@@ -8,8 +10,8 @@ export const deckReducer = (state = initialDeckState, action = {}) => {
   switch (action.type) {
     case START_GAME_DECK:
       return Object.assign({}, state, { deck: action.payload });
-    case REMOVE_CARD_FROM_DECK:
-      return Object.assign({}, state, {deck: removedMatchingPair(state)});
+      case REMOVE_CARD_FROM_DECK:
+        return Object.assign({}, state, { deck: action.payload });
     default:
       return state;
   }
@@ -85,17 +87,13 @@ const playClickSelection = (state, action) => {
   }
 };
 
-const removedMatchingPair = (state) => {
-  const currentDeck = state.deck
-  const toBeRemoved = state.removeCardFromDeck
-  const newDeck = toBeRemoved.map(cardToBeRemoved =>
-    currentDeck.filter(card => cardToBeRemoved.id !== card.id)
-  )
-  console.log ("I have been clicked ",newDeck )
-  return newDeck
-};
+
+
+
+
 
 export const playReducer = (state = initialPlayState, action = {}) => {
+ // const allState=action; 
   switch (action.type) {
     case CLICK_ON_CARD:
 
@@ -103,4 +101,8 @@ export const playReducer = (state = initialPlayState, action = {}) => {
     default:
       return state;
   }
+
+
 };
+
+
