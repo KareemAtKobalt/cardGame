@@ -1,6 +1,8 @@
-import { START_GAME_DECK, CLICK_ON_CARD, REMOVE_CARD_FROM_DECK } from "../constants";
-import { store } from './store.js'
-
+import {
+  START_GAME_DECK,
+  CLICK_ON_CARD,
+  REMOVE_CARD_FROM_DECK
+} from "../constants";
 
 const initialDeckState = {
   deck: []
@@ -10,21 +12,19 @@ export const deckReducer = (state = initialDeckState, action = {}) => {
   switch (action.type) {
     case START_GAME_DECK:
       return Object.assign({}, state, { deck: action.payload });
-      case REMOVE_CARD_FROM_DECK:
-        return Object.assign({}, state, { deck: action.payload });
+    case REMOVE_CARD_FROM_DECK:
+      return Object.assign({}, state, { deck: action.payload });
     default:
       return state;
   }
 };
 
-
-
 const initialPlayState = {
-  attemptInAPlay: 1,
+  currentAttemptInAPlay: 1,
   matchingPairsInPlay: 0,
   firstSelection: [],
   secondSelection: [],
-  cardsToBeRemoved: []
+  cardsToBeRemovedFromDeck: []
 };
 
 const insertItem = (array, action) => {
@@ -34,75 +34,80 @@ const insertItem = (array, action) => {
 };
 
 const removeCardFromDeck = (firstCardArry, secondCardArry) => {
-  const cardsToBeRemoved = []
+  const cardsToBeRemovedFromDeck = [];
   for (let i = firstCardArry.length - 1; i > 0; i--) {
     // remove from firstCardArry [i] secondCardArry[i]
 
-    cardsToBeRemoved.push(firstCardArry[i])
-    cardsToBeRemoved.push(secondCardArry[i])
+    cardsToBeRemovedFromDeck.push(firstCardArry[i]);
+    cardsToBeRemovedFromDeck.push(secondCardArry[i]);
 
-
-    //console.log("cardsToBeRemoved :", cardsToBeRemoved)
-
-
+    //console.log("cardsToBeRemovedFromDeck :", cardsToBeRemovedFromDeck)
   }
-  return cardsToBeRemoved;
-
-}
-
-
+  return cardsToBeRemovedFromDeck;
+};
 
 const playClickSelection = (state, action) => {
   let {
     firstSelection,
     secondSelection,
-    attemptInAPlay,
+    currentAttemptInAPlay,
     matchingPairsInPlay,
-    cardsToBeRemoved,
+    cardsToBeRemovedFromDeck
   } = state;
-  if (firstSelection.length === attemptInAPlay - 1 && attemptInAPlay !== 0) {
+  if (
+    firstSelection.length === currentAttemptInAPlay - 1 &&
+    currentAttemptInAPlay !== 0
+  ) {
     return { firstSelection: insertItem(firstSelection, action) };
   }
   if (firstSelection.length - secondSelection.length === 1) {
     secondSelection = insertItem(secondSelection, action);
     if (firstSelection[0].number === secondSelection[0].number) {
-      attemptInAPlay++;
+      currentAttemptInAPlay++;
       matchingPairsInPlay++;
-      // method to highLight Card 
-
-
+      // method to highLight Card
     } else {
-      attemptInAPlay = 0;
-      // remove cards from deck 
-      cardsToBeRemoved = removeCardFromDeck(firstSelection, secondSelection)
-      // console.log("None matching pair ",attemptInAPlay )
-
+      // the end of a players attempts in a play
+      currentAttemptInAPlay = 0;
+      // remove cards from deck
+      cardsToBeRemovedFromDeck = removeCardFromDeck(
+        firstSelection,
+        secondSelection
+      );
+      matchingPairsInPlay = 0;
+      firstSelection = [];
+      secondSelection = [];
     }
     return {
+      firstSelection: firstSelection,
       secondSelection: secondSelection,
-      attemptInAPlay: attemptInAPlay,
+      currentAttemptInAPlay: currentAttemptInAPlay,
       matchingPairsInPlay: matchingPairsInPlay,
-      cardsToBeRemoved: cardsToBeRemoved
+      cardsToBeRemovedFromDeck: cardsToBeRemovedFromDeck
     };
   }
 };
 
-
-
-
-
-
 export const playReducer = (state = initialPlayState, action = {}) => {
- // const allState=action; 
+  // const allState=action;
   switch (action.type) {
     case CLICK_ON_CARD:
-
       return Object.assign({}, state, playClickSelection(state, action));
+    case REMOVE_CARD_FROM_DECK:
+      return Object.assign({}, state, { cardsToBeRemovedFromDeck: [] });
     default:
       return state;
   }
-
-
 };
 
+const initialgameState = {
+  // array of player object {id, name, score, matchingPairsWon[], isCurrentTurn?}
+  players: []
+};
 
+export const gameReducer = (state = initialgameState, action = {}) => {
+  switch (action.type) {
+    case START_GAME_DECK:
+      return Object.assign({}, state, { players: action.payload });
+  }
+};

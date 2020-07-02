@@ -1,6 +1,10 @@
-import { START_GAME_DECK, CLICK_ON_CARD, REMOVE_CARD_FROM_DECK } from "../constants";
+import {
+  START_GAME_DECK,
+  CLICK_ON_CARD,
+  REMOVE_CARD_FROM_DECK
+} from "../constants";
 import createDeck from "../helper/createDeck";
-import {removeMatchingPair} from "../helper/removeMatchingPair";
+import { removeMatchingPair } from "../helper/removeMatchingPair";
 
 export const newGame = () => {
   return {
@@ -19,13 +23,11 @@ export const clickOnCard = card => {
       id: card.id
     }
   };
-
 };
 
 export const clickOnEndPlay = store => {
   return {
     type: REMOVE_CARD_FROM_DECK,
-    payload: removeMatchingPair (store)
-  }
-}
-
+    payload: removeMatchingPair(store)
+  };
+};
