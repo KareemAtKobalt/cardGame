@@ -1,7 +1,8 @@
 import {
   START_GAME_DECK,
   CLICK_ON_CARD,
-  REMOVE_CARD_FROM_DECK
+  REMOVE_CARD_FROM_DECK,
+  ADD_PLAYER
 } from "../constants";
 
 const initialDeckState = {
@@ -102,12 +103,24 @@ export const playReducer = (state = initialPlayState, action = {}) => {
 
 const initialgameState = {
   // array of player object {id, name, score, matchingPairsWon[], isCurrentTurn?}
-  players: []
+  players: [],
+  playerForm: 1
+};
+
+const addToPlayerForm = playerForm => {
+  return playerForm++;
 };
 
 export const gameReducer = (state = initialgameState, action = {}) => {
   switch (action.type) {
     case START_GAME_DECK:
-      return Object.assign({}, state, { players: action.payload });
+      // this was copy and pasted, need to add the payload for players[]
+      return Object.assign({}, state);
+    case ADD_PLAYER:
+      return Object.assign({}, state, {
+        playerForm: addToPlayerForm(state.playerForm)
+      });
+    default:
+      return state;
   }
 };

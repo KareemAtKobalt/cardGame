@@ -1,7 +1,8 @@
 import {
   START_GAME_DECK,
   CLICK_ON_CARD,
-  REMOVE_CARD_FROM_DECK
+  REMOVE_CARD_FROM_DECK,
+  ADD_PLAYER
 } from "../constants";
 import createDeck from "../helper/createDeck";
 import { removeMatchingPair } from "../helper/removeMatchingPair";
@@ -29,5 +30,12 @@ export const clickOnEndPlay = store => {
   return {
     type: REMOVE_CARD_FROM_DECK,
     payload: removeMatchingPair(store)
+  };
+};
+
+export const clickAddAPlayer = () => {
+  console.log("__________click");
+  return {
+    type: ADD_PLAYER
   };
 };
