@@ -13,9 +13,9 @@ const initialDeckState = {
 export const deckReducer = (state = initialDeckState, action = {}) => {
   switch (action.type) {
     case START_GAME_DECK:
-      return Object.assign({}, state, { deck: action.payload });
+      return {...state, deck: action.payload };
     case REMOVE_CARD_FROM_DECK:
-      return Object.assign({}, state, { deck: action.payload });
+      return {...state, deck: action.payload };
     default:
       return state;
   }
@@ -96,7 +96,7 @@ export const playReducer = (state = initialPlayState, action = {}) => {
     case CLICK_ON_CARD:
       return Object.assign({}, state, playClickSelection(state, action));
     case REMOVE_CARD_FROM_DECK:
-      return Object.assign({}, state, { cardsToBeRemovedFromDeck: [] });
+      return {...state,  cardsToBeRemovedFromDeck: [] };
     default:
       return state;
   }
@@ -111,14 +111,14 @@ const initialgameState = {
 
 
 export const gameReducer = (state = initialgameState, action = {}) => {
-  console.log("state ",state.playerForm)
+  console.log("Previous ", state)
   switch (action.type) {
     case START_GAME_DECK:
       // this was copy and pasted, need to add the payload for players[]
       return Object.assign({}, state);
     case ADD_PLAYER:
-      console.log("addToPlayerForm ( state.playerForm) ", addToPlayerForm ( state.playerForm))
-      return {...state, playerForm: addToPlayerForm( state.playerForm)};
+      const val =state.playerForm
+      return {...state,playerForm: addToPlayerForm( val)};
     default:
       return state;
   }

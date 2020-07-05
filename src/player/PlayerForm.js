@@ -9,44 +9,38 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
 
-  return { clickAddPlayer: (e) => { 
-    e.preventDefault() ; 
-    dispatch(clickAddAPlayer());
-  } };
+  return {
+    clickAddPlayer: (e) => {
+      e.preventDefault();
+      dispatch(clickAddAPlayer());
+    }
+  };
 };
 
-// const numberOfPlayerInput = props => {
-//   for (let i = 0; i < props; i++) {
-//     console.log("look at me 2 ", props);
-//     return <PlayerInput />;
-    
-//   }
-// };
+const numberOfPlayerInput = props => {
+  let arr = []
+  for (let i = 0; i < props; i++) {
+    arr.push(<PlayerInput />);
+    console.log("arr", arr)
+  }
+  return arr
+};
 
 class PlayerForm extends Component {
-  renderPlayerForm = () => {
-    const playerForm = this.props.playerForm;
-    for (let i = 0; i < playerForm; i++) {
-      console.log("look at me 2 ", playerForm);
-      return <PlayerInput />;
-      
-    }
-
-  };
-
   render() {
-    console.log(this.props.playerForm)
     return (
       <form>
         <button onClick={this.props.clickAddPlayer}>ADD PLAYER</button>
-        {this.renderPlayerForm()}
+        {numberOfPlayerInput(this.props.playerForm)}
         <br />
         <br />
         <br />
         <input type="submit" value="submit" />
       </form>
     );
+
   }
+
 }
 
 export default connect(

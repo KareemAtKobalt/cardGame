@@ -1,7 +1,9 @@
 
 
  export const addToPlayerForm = playerForm => {
-    return playerForm= playerForm+1;
+    let toCHange =playerForm ;
+    console.log ("this toCHaneg ",toCHange)
+    return toCHange= toCHange+1;
   };
 
   
