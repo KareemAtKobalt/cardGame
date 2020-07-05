@@ -4,6 +4,7 @@ import {
   REMOVE_CARD_FROM_DECK,
   ADD_PLAYER
 } from "../constants";
+import { addToPlayerForm } from "../helper/playerFunctions";
 
 const initialDeckState = {
   deck: []
@@ -107,19 +108,17 @@ const initialgameState = {
   playerForm: 1
 };
 
-const addToPlayerForm = playerForm => {
-  return playerForm++;
-};
+
 
 export const gameReducer = (state = initialgameState, action = {}) => {
+  console.log("state ",state.playerForm)
   switch (action.type) {
     case START_GAME_DECK:
       // this was copy and pasted, need to add the payload for players[]
       return Object.assign({}, state);
     case ADD_PLAYER:
-      return Object.assign({}, state, {
-        playerForm: addToPlayerForm(state.playerForm)
-      });
+      console.log("addToPlayerForm ( state.playerForm) ", addToPlayerForm ( state.playerForm))
+      return {...state, playerForm: addToPlayerForm( state.playerForm)};
     default:
       return state;
   }

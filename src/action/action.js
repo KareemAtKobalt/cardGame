@@ -6,6 +6,7 @@ import {
 } from "../constants";
 import createDeck from "../helper/createDeck";
 import { removeMatchingPair } from "../helper/removeMatchingPair";
+//import { addToPlayerForm } from "../helper/playerFunctions";
 
 export const newGame = () => {
   return {
@@ -33,9 +34,10 @@ export const clickOnEndPlay = store => {
   };
 };
 
-export const clickAddAPlayer = () => {
-  console.log("__________click");
+export const clickAddAPlayer = (increase) => {
+  console.log("__________click",increase );
   return {
     type: ADD_PLAYER
+    //payload:addToPlayerForm (increase)
   };
 };

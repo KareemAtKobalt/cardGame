@@ -5,6 +5,7 @@ const PlayerInput = () => {
     <label>
       Player Name
       <input type="text" name="playerName" placeholder="add player name" />
+      {console.log("Nani")}
     </label>
   );
 };

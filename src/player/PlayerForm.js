@@ -8,27 +8,38 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => {
-  return { clickAddPlayer: () => dispatch(clickAddAPlayer()) };
+
+  return { clickAddPlayer: (e) => { 
+    e.preventDefault() ; 
+    dispatch(clickAddAPlayer());
+  } };
 };
 
-const numberOfPlayerInput = props => {
-  console.log("look at me", props);
-  for (let i = 0; i < props.playerForm; i++) {
-    return <PlayerInput />;
-  }
-};
+// const numberOfPlayerInput = props => {
+//   for (let i = 0; i < props; i++) {
+//     console.log("look at me 2 ", props);
+//     return <PlayerInput />;
+    
+//   }
+// };
 
 class PlayerForm extends Component {
-  clickAddAPlayer = () => {
-    this.props.clickAddPlayer();
+  renderPlayerForm = () => {
+    const playerForm = this.props.playerForm;
+    for (let i = 0; i < playerForm; i++) {
+      console.log("look at me 2 ", playerForm);
+      return <PlayerInput />;
+      
+    }
+
   };
 
   render() {
+    console.log(this.props.playerForm)
     return (
       <form>
-        <button onClick={this.clickAddAPlayer}>ADD PLAYER</button>
-        {numberOfPlayerInput(this.props.playerForm)}
-        {/* {store.getState().playerForm} */}
+        <button onClick={this.props.clickAddPlayer}>ADD PLAYER</button>
+        {this.renderPlayerForm()}
         <br />
         <br />
         <br />
