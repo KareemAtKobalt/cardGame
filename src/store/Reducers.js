@@ -126,10 +126,10 @@ const addPlayerObjectToState = playersState => {
     matchingPairsWon: [],
     isCurrentTurn: true
   }
-  return playerArray.push(player)
+  playerArray.push(player);
+  return playerArray
 }
 export const gameReducer = (state = initialgameState, action = {}) => {
-  console.log("Previous ", state)
   switch (action.type) {
     case START_GAME_DECK:
       // this was copy and pasted, need to add the payload for players[]
@@ -138,7 +138,7 @@ export const gameReducer = (state = initialgameState, action = {}) => {
       const val = state.playerForm
       return {
         ...state, playerForm: addToPlayerForm(val),
-                  player:addPlayerObjectToState (state.players)
+        players: addPlayerObjectToState(state.players)
       };
     case SUBMIT_PLAYERS:
       return { ...state, players: submitPlayersButton(action.payload) };
