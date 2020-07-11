@@ -7,3 +7,11 @@
   };
 
   
+export const submitPlayersButton = playerForm  => {
+  return {
+    id: playerForm.id, 
+    playerName: playerForm.name, 
+    matchingPairsWon: [],
+    isCurrentTurn: false
+  }
+}

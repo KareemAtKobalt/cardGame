@@ -2,9 +2,10 @@ import {
   START_GAME_DECK,
   CLICK_ON_CARD,
   REMOVE_CARD_FROM_DECK,
-  ADD_PLAYER
+  ADD_PLAYER,
+  SUBMIT_PLAYERS
 } from "../constants";
-import { addToPlayerForm } from "../helper/playerFunctions";
+import { addToPlayerForm, submitPlayersButton } from "../helper/playerFunctions";
 
 const initialDeckState = {
   deck: []
@@ -13,9 +14,9 @@ const initialDeckState = {
 export const deckReducer = (state = initialDeckState, action = {}) => {
   switch (action.type) {
     case START_GAME_DECK:
-      return {...state, deck: action.payload };
+      return { ...state, deck: action.payload };
     case REMOVE_CARD_FROM_DECK:
-      return {...state, deck: action.payload };
+      return { ...state, deck: action.payload };
     default:
       return state;
   }
@@ -96,7 +97,7 @@ export const playReducer = (state = initialPlayState, action = {}) => {
     case CLICK_ON_CARD:
       return Object.assign({}, state, playClickSelection(state, action));
     case REMOVE_CARD_FROM_DECK:
-      return {...state,  cardsToBeRemovedFromDeck: [] };
+      return { ...state, cardsToBeRemovedFromDeck: [] };
     default:
       return state;
   }
@@ -104,12 +105,29 @@ export const playReducer = (state = initialPlayState, action = {}) => {
 
 const initialgameState = {
   // array of player object {id, name, score, matchingPairsWon[], isCurrentTurn?}
-  players: [],
+  players: [{
+    id: 1,
+    name: "Guest",
+    score: 0,
+    matchingPairsWon: [],
+    isCurrentTurn: true
+
+  }],
   playerForm: 1
 };
 
-
-
+const addPlayerObjectToState = playersState => {
+  const nextPlayer = playersState.length + 1
+  let playerArray = playersState
+  const player = {
+    id: nextPlayer,
+    name: "Guest " + nextPlayer,
+    score: 0,
+    matchingPairsWon: [],
+    isCurrentTurn: true
+  }
+  return playerArray.push(player)
+}
 export const gameReducer = (state = initialgameState, action = {}) => {
   console.log("Previous ", state)
   switch (action.type) {
@@ -117,9 +135,15 @@ export const gameReducer = (state = initialgameState, action = {}) => {
       // this was copy and pasted, need to add the payload for players[]
       return Object.assign({}, state);
     case ADD_PLAYER:
-      const val =state.playerForm
-      return {...state,playerForm: addToPlayerForm( val)};
+      const val = state.playerForm
+      return {
+        ...state, playerForm: addToPlayerForm(val),
+                  player:addPlayerObjectToState (state.players)
+      };
+    case SUBMIT_PLAYERS:
+      return { ...state, players: submitPlayersButton(action.payload) };
     default:
       return state;
   }
+
 };

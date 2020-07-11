@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PlayerInput from "./PlayerInput";
 import { connect } from "react-redux";
-import { clickAddAPlayer } from "../action/action";
+import { clickAddAPlayer, clickSubmitPlayers } from "../action/action";
 
 const mapStateToProps = state => {
   return { playerForm: state.gameReducer.playerForm };
@@ -13,6 +13,10 @@ const mapDispatchToProps = dispatch => {
     clickAddPlayer: (e) => {
       e.preventDefault();
       dispatch(clickAddAPlayer());
+    },
+    clickSubmitPlayers: (e)=> {
+      e.prevntDefault (); 
+      dispatch (clickSubmitPlayers());
     }
   };
 };
@@ -20,7 +24,7 @@ const mapDispatchToProps = dispatch => {
 const numberOfPlayerInput = props => {
   let arr = []
   for (let i = 0; i < props; i++) {
-    arr.push(<PlayerInput />);
+    arr.push(<PlayerInput/>);
     console.log("arr", arr)
   }
   return arr
@@ -31,11 +35,11 @@ class PlayerForm extends Component {
     return (
       <form>
         <button onClick={this.props.clickAddPlayer}>ADD PLAYER</button>
-        {numberOfPlayerInput(this.props.playerForm)}
+          {numberOfPlayerInput(this.props.playerForm)}
         <br />
         <br />
         <br />
-        <input type="submit" value="submit" />
+        <input type="submit" value="submit" onClick= {this.props.clickSubmitPlayers} />
       </form>
     );
 

@@ -2,7 +2,8 @@ import {
   START_GAME_DECK,
   CLICK_ON_CARD,
   REMOVE_CARD_FROM_DECK,
-  ADD_PLAYER
+  ADD_PLAYER, 
+  SUBMIT_PLAYERS
 } from "../constants";
 import createDeck from "../helper/createDeck";
 import { removeMatchingPair } from "../helper/removeMatchingPair";
@@ -41,3 +42,10 @@ export const clickAddAPlayer = (increase) => {
     //payload:addToPlayerForm (increase)
   };
 };
+
+export const clickSubmitPlayers = (players) => {
+  return {
+    type:SUBMIT_PLAYERS,
+    payload: players 
+  }
+}
