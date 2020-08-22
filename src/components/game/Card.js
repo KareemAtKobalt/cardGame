@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import "./Card.css";
 import { clickOnCard } from "../../action/action";
 
-
 const renderSwitch = card => {
   if (card.number) {
     switch (card.number) {
@@ -38,7 +37,6 @@ const mapDispatchToProps = dispatch => {
 
 const Card = props => {
   const card = props.card;
-  console.log("Card ", card);
 
   return (
     <div className="Card" onClick={e => props.clickOnCard(e.target, card)}>

@@ -1,11 +1,14 @@
 import {
   START_GAME_DECK,
   CLICK_ON_CARD,
-  REMOVE_CARD_FROM_DECK,
+  END_PLAY,
   ADD_PLAYER,
-  SUBMIT_PLAYERS
+  SUBMIT_PLAYERS,
+  START_GAME,
+  END_PLAY_TURN
 } from "../constants";
-import { addToPlayerForm, submitPlayersButton } from "../helper/playerFunctions";
+import { addToPlayerForm, changePlayerName } from "../helper/playerFunctions";
+import { changePlayersCurrentTurn } from "../helper/gameFunctions";
 
 const initialDeckState = {
   deck: []
@@ -15,7 +18,7 @@ export const deckReducer = (state = initialDeckState, action = {}) => {
   switch (action.type) {
     case START_GAME_DECK:
       return { ...state, deck: action.payload };
-    case REMOVE_CARD_FROM_DECK:
+    case END_PLAY:
       return { ...state, deck: action.payload };
     default:
       return state;
@@ -43,8 +46,6 @@ const removeCardFromDeck = (firstCardArry, secondCardArry) => {
 
     cardsToBeRemovedFromDeck.push(firstCardArry[i]);
     cardsToBeRemovedFromDeck.push(secondCardArry[i]);
-
-    //console.log("cardsToBeRemovedFromDeck :", cardsToBeRemovedFromDeck)
   }
   return cardsToBeRemovedFromDeck;
 };
@@ -96,7 +97,7 @@ export const playReducer = (state = initialPlayState, action = {}) => {
   switch (action.type) {
     case CLICK_ON_CARD:
       return Object.assign({}, state, playClickSelection(state, action));
-    case REMOVE_CARD_FROM_DECK:
+    case END_PLAY:
       return { ...state, cardsToBeRemovedFromDeck: [] };
     default:
       return state;
@@ -105,45 +106,54 @@ export const playReducer = (state = initialPlayState, action = {}) => {
 
 const initialgameState = {
   // array of player object {id, name, score, matchingPairsWon[], isCurrentTurn?}
-  players: [{
-    id: 1,
-    name: "Guest",
-    score: 0,
-    matchingPairsWon: [],
-    isCurrentTurn: true
-
-  }],
-  playerForm: 1
+  players: [
+    {
+      id: 1,
+      name: "Guest",
+      score: 0,
+      matchingPairsWon: [],
+      isCurrentTurn: true
+    }
+  ],
+  playerForm: 1,
+  matchInPlay: false
 };
 
 const addPlayerObjectToState = playersState => {
-  const nextPlayer = playersState.length + 1
-  let playerArray = playersState
+  const nextPlayer = playersState.length + 1;
+  let playerArray = playersState;
   const player = {
     id: nextPlayer,
     name: "Guest " + nextPlayer,
     score: 0,
     matchingPairsWon: [],
     isCurrentTurn: true
-  }
+  };
   playerArray.push(player);
-  return playerArray
-}
+  return playerArray;
+};
 export const gameReducer = (state = initialgameState, action = {}) => {
   switch (action.type) {
-    case START_GAME_DECK:
-      // this was copy and pasted, need to add the payload for players[]
-      return Object.assign({}, state);
+    case START_GAME:
+      return { ...state, matchInPlay: action.payload };
     case ADD_PLAYER:
-      const val = state.playerForm
+      const val = state.playerForm;
       return {
-        ...state, playerForm: addToPlayerForm(val),
+        ...state,
+        playerForm: addToPlayerForm(val),
         players: addPlayerObjectToState(state.players)
       };
     case SUBMIT_PLAYERS:
-      return { ...state, players: submitPlayersButton(action.payload) };
+      return {
+        ...state,
+        players: changePlayerName(action.payload, state.players)
+      };
+    case END_PLAY_TURN:
+      return {
+        ...state,
+        players: changePlayersCurrentTurn(action.payload, state.players)
+      };
     default:
       return state;
   }
-
 };
