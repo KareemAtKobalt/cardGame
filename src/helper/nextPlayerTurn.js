@@ -1,5 +1,6 @@
 export const nextPlayerTurn = (currentPlayerId, numberOfPlayers) => {
-  return currentPlayerId === numberOfPlayers
-    ? { currentPlayerId, nextPlayerId: 0 }
-    : { currentPlayerId, nextPlayerId: currentPlayerId++ };
+  const test = currentPlayerId === numberOfPlayers
+    ? { currentPlayerId, nextPlayerId: 1 }
+    : { currentPlayerId, nextPlayerId: currentPlayerId+1 };
+    return test;
 };

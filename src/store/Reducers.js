@@ -5,9 +5,10 @@ import {
   ADD_PLAYER,
   SUBMIT_PLAYERS,
   START_GAME,
-  END_PLAY_TURN
+  END_PLAY_TURN, 
+  SWITCH_PLAYER_TURN
 } from "../constants";
-import { addToPlayerForm, changePlayerName } from "../helper/playerFunctions";
+import { addToPlayerForm, changePlayerName,firstPlayTurn } from "../helper/playerFunctions";
 import { changePlayersCurrentTurn } from "../helper/gameFunctions";
 
 const initialDeckState = {
@@ -99,6 +100,8 @@ export const playReducer = (state = initialPlayState, action = {}) => {
       return Object.assign({}, state, playClickSelection(state, action));
     case END_PLAY:
       return { ...state, cardsToBeRemovedFromDeck: [] };
+    case SWITCH_PLAYER_TURN:
+      return {...state, currentAttemptInAPlay: action.payload}; 
     default:
       return state;
   }
@@ -112,7 +115,7 @@ const initialgameState = {
       name: "Guest",
       score: 0,
       matchingPairsWon: [],
-      isCurrentTurn: true
+      isCurrentTurn: false
     }
   ],
   playerForm: 1,
@@ -127,7 +130,7 @@ const addPlayerObjectToState = playersState => {
     name: "Guest " + nextPlayer,
     score: 0,
     matchingPairsWon: [],
-    isCurrentTurn: true
+    isCurrentTurn: false
   };
   playerArray.push(player);
   return playerArray;
@@ -135,7 +138,7 @@ const addPlayerObjectToState = playersState => {
 export const gameReducer = (state = initialgameState, action = {}) => {
   switch (action.type) {
     case START_GAME:
-      return { ...state, matchInPlay: action.payload };
+      return { ...state, matchInPlay: action.payload, players: firstPlayTurn (state.players) };
     case ADD_PLAYER:
       const val = state.playerForm;
       return {

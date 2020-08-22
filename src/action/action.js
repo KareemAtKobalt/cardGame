@@ -5,7 +5,8 @@ import {
   END_PLAY,
   ADD_PLAYER,
   SUBMIT_PLAYERS,
-  END_PLAY_TURN
+  END_PLAY_TURN, 
+  SWITCH_PLAYER_TURN
 } from "../constants";
 import createDeck from "../helper/createDeck";
 import { removeMatchingPair } from "../helper/removeMatchingPair";
@@ -39,21 +40,23 @@ export const clickOnCard = card => {
 
 export const clickOnEndPlay = store => {
   const playersState = store.gameReducer.players;
-  const playerId = () => {
-    console.log("hi");
+  const getPlayerId = () => {
     const playerState = playersState.find(player => player.isCurrentTurn);
-    console.log("___________playerState", playerState);
+    console.log ('HI ',playerState.id);
     return playerState.id;
   };
 
-  console.log("___________0.7", 0.7);
   return dispatch => {
     dispatch({ type: END_PLAY, payload: removeMatchingPair(store) });
-    console.log("___________1", 1);
+
+
     dispatch({
       type: END_PLAY_TURN,
-      test: console.log("___________playersState", playersState),
-      payload: nextPlayerTurn(playerId(), playersState.length)
+      payload: nextPlayerTurn(getPlayerId(), playersState.length)
+    });
+
+    dispatch({
+      type: SWITCH_PLAYER_TURN
     });
   };
 };
@@ -71,6 +74,7 @@ export const submitPlayerName = playerIdAndName => {
     payload: playerIdAndName
   };
 };
+
 
 // export const ChangePlayersTurn = (currentPlayerIndex, numberOfPlayers) => {
 //   return {

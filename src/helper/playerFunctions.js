@@ -11,3 +11,9 @@ export const changePlayerName = (player, playersState) => {
   });
   return playersState;
 };
+
+
+export const firstPlayTurn =state =>  {
+  state[0].isCurrentTurn =true; 
+  return state; 
+}

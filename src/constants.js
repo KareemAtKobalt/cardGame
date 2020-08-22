@@ -5,3 +5,4 @@ export const END_PLAY = "END_PLAY";
 export const ADD_PLAYER = "ADD_PLAYER";
 export const SUBMIT_PLAYERS = "SUBMIT_PLAYERS";
 export const END_PLAY_TURN = "END_PLAY_TURN";
+export const SWITCH_PLAYER_TURN = "SWITCH_PLAYER_TURN";

@@ -5,13 +5,10 @@ import thunk from "redux-thunk";
 const rootReducer = combineReducers({ deckReducer, playReducer, gameReducer });
 const tools =
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
-const enhancers = [tools, applyMiddleware(thunk)];
+const enhancers = [ applyMiddleware(thunk), tools];
 export const store = createStore(
   rootReducer,
-  applyMiddleware(thunk)
-  // compose(...enhancers)
-  // tools,
-  // applyMiddleware(thunkMiddleware)
+  compose(...enhancers)
 );
 
 export default store;
