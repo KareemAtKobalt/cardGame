@@ -6,3 +6,5 @@ export const ADD_PLAYER = "ADD_PLAYER";
 export const SUBMIT_PLAYERS = "SUBMIT_PLAYERS";
 export const END_PLAY_TURN = "END_PLAY_TURN";
 export const SWITCH_PLAYER_TURN = "SWITCH_PLAYER_TURN";
+export const ADD_PAIRS_TO_TOTAL = "ADD_PAIRS_TO_TOTAL";
+export const UPDATE_SCORE ="UPDATE_SCORE";

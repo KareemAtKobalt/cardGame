@@ -6,7 +6,9 @@ import {
   SUBMIT_PLAYERS,
   START_GAME,
   END_PLAY_TURN, 
-  SWITCH_PLAYER_TURN
+  SWITCH_PLAYER_TURN, 
+  ADD_PAIRS_TO_TOTAL, 
+  UPDATE_SCORE
 } from "../constants";
 import { addToPlayerForm, changePlayerName,firstPlayTurn } from "../helper/playerFunctions";
 import { changePlayersCurrentTurn } from "../helper/gameFunctions";
@@ -101,7 +103,7 @@ export const playReducer = (state = initialPlayState, action = {}) => {
     case END_PLAY:
       return { ...state, cardsToBeRemovedFromDeck: [] };
     case SWITCH_PLAYER_TURN:
-      return {...state, currentAttemptInAPlay: action.payload}; 
+      return {...state, currentAttemptInAPlay: 1}; 
     default:
       return state;
   }
@@ -156,7 +158,38 @@ export const gameReducer = (state = initialgameState, action = {}) => {
         ...state,
         players: changePlayersCurrentTurn(action.payload, state.players)
       };
+    case ADD_PAIRS_TO_TOTAL: 
+      return {
+        ...state, 
+        players: updatingPlayersMatchingPairs(state.players, action.payload)
+      };
+    case UPDATE_SCORE: 
+      return {
+        ...state, 
+        players :updateScore (state.players, action.payload)
+      }
+
     default:
       return state;
   }
 };
+
+const updatingPlayersMatchingPairs =( player, matchingPairs) => {
+    for (let i =0 ; i< player.length ;i ++){
+     if (player[i].isCurrentTurn === true ) { 
+       const tempArray = player[i].matchingPairsWon ; 
+       player[i].matchingPairsWon =[...tempArray, matchingPairs]
+       console.log ('Check THis ->', player[i].id)
+       return player
+      }
+       
+    }
+}
+
+const updateScore =(players,matchingPairs) => {
+  return players.map (player=>{
+    if (player.isCurrentTurn && matchingPairs.length>0) 
+      player.score =player.score+matchingPairs.length/2
+      return player 
+    })
+}

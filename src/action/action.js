@@ -6,7 +6,9 @@ import {
   ADD_PLAYER,
   SUBMIT_PLAYERS,
   END_PLAY_TURN, 
-  SWITCH_PLAYER_TURN
+  SWITCH_PLAYER_TURN, 
+  ADD_PAIRS_TO_TOTAL, 
+  UPDATE_SCORE
 } from "../constants";
 import createDeck from "../helper/createDeck";
 import { removeMatchingPair } from "../helper/removeMatchingPair";
@@ -47,6 +49,8 @@ export const clickOnEndPlay = store => {
   };
 
   return dispatch => {
+    dispatch ({type: ADD_PAIRS_TO_TOTAL, payload: store.playReducer.cardsToBeRemovedFromDeck})
+    dispatch ({type:UPDATE_SCORE , payload:store.playReducer.cardsToBeRemovedFromDeck})
     dispatch({ type: END_PLAY, payload: removeMatchingPair(store) });
 
 
