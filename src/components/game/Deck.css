@@ -1,0 +1,30 @@
+
+.Deck {
+    display: flex;
+    justify-content: space-between;
+    background: green;
+    text-align: center;
+    padding: 25px;
+    flex-wrap: wrap ;
+    flex-grow: 1
+}
+
+/* .Deck > * {
+    background: white;
+    flex: 0 1 15px;
+  }  */
+
+/* .child {
+    background: orange;
+    text-align: center;
+    padding: 25px;
+    
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .child > span {
+    height: 50px;
+    background: darkred;
+    flex: 0 1 30%;
+  } */

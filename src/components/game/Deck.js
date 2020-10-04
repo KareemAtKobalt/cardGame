@@ -3,6 +3,7 @@ import Card from "./Card";
 import { connect } from "react-redux";
 import { newGameDeck, clickOnEndPlay } from "../../action/action";
 import { store } from "../../store/store";
+import "./Deck.css";
 
 //may need to move these functions in app.js so all components can access it.
 const mapStateToProps = state => {
@@ -25,8 +26,10 @@ class Deck extends Component {
   };
   render() {
     return (
-      <div>
-        <button onClick={this.handleClick}> END GAME </button>
+      <div className="Deck">
+        <button hidden onClick={this.handleClick}>
+          END GAME
+        </button>
         {this.props.deck.map((card, index) => (
           <Card key={index} card={card} />
         ))}
