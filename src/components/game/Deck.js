@@ -27,10 +27,8 @@ class Deck extends Component {
   render() {
     return (
       <div className="Deck">
-        {" "}
         <button hidden onClick={this.handleClick}>
-          {" "}
-          END GAME{" "}
+          END GAME
         </button>
         {this.props.deck.map((card, index) => (
           <Card key={index} card={card} />
