@@ -1,7 +1,9 @@
 
 .Card {
-    width:4em;
-    height:6em;
+    width: 8em;
+    height: 10em;
     border: 4px solid black;
-    margin: 10px auto
+    margin: 10px auto;
+    background: white;
+    flex: 0 1 auto;
 }
