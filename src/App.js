@@ -1,15 +1,24 @@
 import React from "react";
 import { connect } from "react-redux";
-import "./App.css";
+import classes from "./App.css";
 import Deck from "./components/game/Deck";
 import PlayerForm from "./player/PlayerForm";
-import store from "./store/store";
+import { Route, BrowserRouter, Switch } from 'react-router-dom';
+import Layout from './hoc/Layout/Layout';
 
 function App() {
   return (
-    <div className="App">
-      {store.getState().gameReducer.matchInPlay ? <Deck /> : <PlayerForm />}
-    </div>
+    <BrowserRouter>
+      <Layout>
+        <div className={classes.App}>
+          <Switch>
+            <Route path="/AboutUs" component={Deck} />
+            <Route path="/" component={PlayerForm} />
+            <Route path="/:id" component={PlayerForm} />
+          </Switch>
+        </div>
+      </Layout>
+    </BrowserRouter>
   );
 }
 
