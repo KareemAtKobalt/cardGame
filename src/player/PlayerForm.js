@@ -10,7 +10,7 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch, props) => {
   return {
     clickAddPlayer: e => {
       e.preventDefault();
@@ -19,6 +19,8 @@ const mapDispatchToProps = dispatch => {
     clickSubmitPlayers: e => {
       e.preventDefault();
       dispatch(newGame());
+      debugger;
+      props.history.push('/AboutUs/');
     }
   };
 };
@@ -40,11 +42,8 @@ class PlayerForm extends Component {
         <br />
         <br />
         <br />
-        <input
-          type="submit"
-          value="submit"
-          onClick={this.props.clickSubmitPlayers}
-        />
+        <button onClick= {this.props.clickSubmitPlayers}>Submit</button>
+       
       </form>
     );
   }

@@ -8,12 +8,10 @@ import store from "./store/store";
 ReactDOM.render(
   <Provider store={store}>
     <div className="grid">
-      <header>Navigation</header>
       <div className="center">
         {" "}
         <App />
       </div>
-      <footer>Footer (by samad)</footer>
     </div>
   </Provider>,
   document.getElementById("root")
