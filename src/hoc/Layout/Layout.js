@@ -1,13 +1,19 @@
 import React from 'react';
 import classes from './Layout.css';
+import Toolbar from '../../components/UI/Toolbar/Toolbar';
+import Footer from '../../components/UI/Footer/Footer';
 
 const Layout = (props) => (
     <div>
-        <header>HEADER</header>
+        <Toolbar />
         <main className={classes.Content}>
-            {props.children}
+            <div className={classes.Grid}>
+                <div className={classes.Center}>
+                    {props.children}
+                </div>
+            </div>
         </main>
-        <footer>FOOTER</footer>
+        <Footer />
     </div>
 );
 

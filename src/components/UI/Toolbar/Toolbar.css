@@ -1,0 +1,13 @@
+.Header {
+    background-color: blueviolet;
+    top: 0;
+    left: 0;
+    position: fixed;
+    width: 100%;
+    height: 80px;
+}
+
+.Header nav {
+    float: right;
+    height: 100%;
+}

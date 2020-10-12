@@ -166,7 +166,7 @@ export const gameReducer = (state = initialgameState, action = {}) => {
     case UPDATE_SCORE: 
       return {
         ...state, 
-        players :updateScore (state.players, action.payload)
+        players: updateScore(state.players, action.payload)
       }
 
     default:

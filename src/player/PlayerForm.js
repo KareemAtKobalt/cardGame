@@ -19,8 +19,7 @@ const mapDispatchToProps = (dispatch, props) => {
     clickSubmitPlayers: e => {
       e.preventDefault();
       dispatch(newGame());
-      debugger;
-      props.history.push('/AboutUs/');
+      props.history.push('/AboutUs');
     }
   };
 };

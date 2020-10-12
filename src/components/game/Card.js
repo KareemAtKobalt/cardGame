@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import "./Card.css";
+import classes from "./Card.css";
 import { clickOnCard } from "../../action/action";
 
 const renderSwitch = card => {
@@ -39,7 +39,7 @@ const Card = props => {
   const card = props.card;
 
   return (
-    <div className="Card" onClick={e => props.clickOnCard(e.target, card)}>
+    <div className={classes.Card} onClick={e => props.clickOnCard(e.target, card)}>
       {renderSwitch(card)}
       <br />
       {card.suite}
