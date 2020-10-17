@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import Card from "./Card";
+import Card from "../Card/Card";
 import { connect } from "react-redux";
-import { clickOnEndPlay, newGameDeck } from "../../store/actions/index";
-import { store } from "../../store/store";
+import { clickOnEndPlay, newGameDeck } from "../../../store/actions/index";
+import { store } from "../../../store/store";
 import classes from "./Deck.css";
 
 //may need to move these functions in app.js so all components can access it.

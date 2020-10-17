@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import classes from "./Card.css";
-import { clickOnCard } from "../../store/actions/index";
+import { clickOnCard } from "../../../store/actions/index";
 
 const renderSwitch = (card) => {
 	if (card.number) {
