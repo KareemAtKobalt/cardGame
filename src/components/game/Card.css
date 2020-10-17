@@ -7,3 +7,7 @@
     background: white;
     flex: 0 1 auto;
 }
+
+.CardFlipped {
+    background: black
+}
