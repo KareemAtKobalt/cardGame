@@ -1,5 +1,4 @@
 import * as actionTypes from "../actions/actionTypes";
-import { changePlayerName, firstPlayTurn } from "../../helper/playerFunctions";
 
 const initialState = {
 	// array of player object {id, name, score, matchingPairsWon[], isCurrentTurn?}
@@ -92,6 +91,20 @@ const changePlayersCurrentTurn = (playersIds, playersState) => {
 		if (playerState.id === nextPlayerId) playerState.isCurrentTurn = true;
 	});
 	return playersState;
+};
+
+const changePlayerName = (player, playersState) => {
+	playersState.forEach((playerState) => {
+		if (player.id === playerState.id) {
+			playerState.name = player.name;
+		}
+	});
+	return playersState;
+};
+
+const firstPlayTurn = (players) => {
+	players[0].isCurrentTurn = true;
+	return players;
 };
 
 export default reducer;
