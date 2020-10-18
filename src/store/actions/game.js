@@ -6,10 +6,3 @@ export const submitPlayerName = (playerIdAndName) => {
 		payload: playerIdAndName,
 	};
 };
-
-// export const ChangePlayersTurn = (currentPlayerIndex, numberOfPlayers) => {
-//   return {
-//     type: END_PLAY_TURN,
-//     payload: nextPlayerTurn(currentPlayerIndex, numberOfPlayers)
-//   };
-// };

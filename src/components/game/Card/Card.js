@@ -45,14 +45,16 @@ class Card extends Component {
 	}
 
 	onclickHandler = (card) => {
-		const isCardActive = !this.state.cardActive;
-		this.setState({ cardActive: isCardActive });
-		if (isCardActive) {
-			this.cardClassNames.push(classes.CardFlipped);
-		} else {
-			this.cardClassNames.pop(classes.CardFlipped);
+		if (!this.props.disabled) {
+			const isCardActive = !this.state.cardActive;
+			this.setState({ cardActive: isCardActive });
+			if (isCardActive) {
+				this.cardClassNames.push(classes.CardFlipped);
+			} else {
+				this.cardClassNames.pop(classes.CardFlipped);
+			}
+			this.props.clickOnCard(card);
 		}
-		this.props.clickOnCard(card);
 	};
 
 	cardClassNames = [classes.Card];

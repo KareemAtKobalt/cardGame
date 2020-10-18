@@ -14,7 +14,7 @@ const reducer = (state = initialState, action = {}) => {
 		case actionTypes.CLICK_ON_CARD:
 			return Object.assign({}, state, playClickSelection(state, action));
 		case actionTypes.END_PLAY:
-			return { ...state, cardsToBeRemovedFromDeck: [] };
+			return { ...state, cardsToBeRemovedFromDeck: action.payload };
 		case actionTypes.SWITCH_PLAYER_TURN:
 			return { ...state, currentAttemptInAPlay: 1 };
 		default:

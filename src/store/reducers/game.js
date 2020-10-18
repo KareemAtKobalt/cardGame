@@ -71,7 +71,6 @@ const updatingPlayersMatchingPairs = (player, matchingPairs) => {
 		if (player[i].isCurrentTurn === true) {
 			const tempArray = player[i].matchingPairsWon;
 			player[i].matchingPairsWon = [...tempArray, matchingPairs];
-			console.log("Check THis ->", player[i].id);
 			return player;
 		}
 	}

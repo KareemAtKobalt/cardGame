@@ -10,6 +10,7 @@ const mapStateToProps = (state) => {
 	return {
 		deck: state.deckReducer.deck,
 		players: state.gameReducer.players,
+		disabledCards: state.deckReducer.disabledCards,
 	};
 };
 
@@ -25,14 +26,14 @@ class Deck extends Component {
 		this.props.onLoad();
 	}
 
+	isCardDisabled = (id) => this.props.disabledCards.some((card) => card.id === id);
+
 	render() {
 		return (
 			<div className={classes.Deck}>
-				<button hidden onClick={this.props.buttonClick}>
-					END GAME
-				</button>
+				<button onClick={this.props.buttonClick}>END GAME</button>
 				{this.props.deck.map((card, index) => (
-					<Card key={index} card={card} />
+					<Card key={index} card={card} disabled={this.isCardDisabled(card.id)} />
 				))}
 			</div>
 		);
